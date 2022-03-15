@@ -4,4 +4,3 @@
 
 azure-functions
 scikit-learn
-pickle
