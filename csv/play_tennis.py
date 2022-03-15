@@ -14,8 +14,6 @@ def main():
     play_tennis['windy'] = number.fit_transform(play_tennis['windy'])
     play_tennis['play'] = number.fit_transform(play_tennis['play'])
 
-    print(play_tennis.head())
-
     features = ["outlook", "temp", "humidity", "windy"]
     target = "play"
 
@@ -23,11 +21,6 @@ def main():
 
     model = GaussianNB()
     model.fit(features_train, target_train)
-
-    pred = model.predict(features_test)
-    accuracy = accuracy_score(target_test, pred)
-
-    print(accuracy)
 
     filename = '../api/classify/play_tennis.pkl'
     pickle.dump(model, open(filename, 'wb'))
