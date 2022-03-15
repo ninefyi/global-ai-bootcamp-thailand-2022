@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global AI Bootcamp Thailand 2022</title>
+</head>
+<body>
+    <form action="/api/" method="post">
+        <table>
+            <tr>
+                <td>
+                    <label for="outlook">Outlook</label>
+                </td>
+                <td>
+                    <select name="outlook" id="outlook" >
+                        <option value="overcast">Overcast</option>
+                        <option value="rainy">Rainy</option>
+                        <option value="sunny">Sunny</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="temp">Temperature</label>
+                </td>
+                <td>
+                    <select name="temp" id="temp">
+                        <option value="hot">Hot</option>
+                        <option value="mild">Mild</option>
+                        <option value="cool">Cool</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="humidity">Humidity</label>
+                </td>
+                <td>
+                    <select name="humidity" id="humidity">
+                        <option value="high">High</option>
+                        <option value="normal">Normal</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="windy">Windy</label>
+                </td>
+                <td>
+                    <select name="windy" id="windy">
+                        <option value="false">False</option>
+                        <option value="true">True</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="answer">Play tennis:</label>
+                </td>
+                <td>
+                    <div id="answer"></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button>Predict</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
