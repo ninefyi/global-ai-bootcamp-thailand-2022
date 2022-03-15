@@ -7,7 +7,6 @@ from sklearn.metrics import accuracy_score
 
 def main():
     play_tennis = pd.read_csv('play_tennis.csv')
-    print(play_tennis.head())
     number = LabelEncoder()
     play_tennis['outlook'] = number.fit_transform(play_tennis['outlook'])
     play_tennis['temp'] = number.fit_transform(play_tennis['temp'])
