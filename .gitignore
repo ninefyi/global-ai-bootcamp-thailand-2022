@@ -5,8 +5,11 @@ __pycache__/
 
 # C extensions
 *.so
-.vscode/
 
+mlruns/
+*.log
+*.pkl
+.vscode/
 # Distribution / packaging
 .Python
 build/

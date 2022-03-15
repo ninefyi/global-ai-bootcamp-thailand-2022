@@ -1,6 +1,7 @@
 import logging
 
 import azure.functions as func
+import pickle
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
@@ -14,10 +15,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         else:
             name = req_body.get('name')
 
+    filename = 'play_tennis.pkl'
+    model = pickle.load(open(filename, 'rb'))
+    answer = model.predict([[2,1,0,0]])
     if name:
         return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
     else:
         return func.HttpResponse(
-             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
+             f"Answer: {answer}.",
              status_code=200
         )
