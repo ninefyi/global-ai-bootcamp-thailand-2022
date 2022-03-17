@@ -1,74 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global AI Bootcamp Thailand 2022</title>
 </head>
+
 <body>
-    <form action="/api/classify" method="post">
-        <table>
-            <tr>
-                <td>
-                    <label for="outlook">Outlook</label>
-                </td>
-                <td>
-                    <select name="outlook" id="outlook" >
-                        <option value="0">Overcast</option>
-                        <option value="1">Rainy</option>
-                        <option value="2">Sunny</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="temp">Temperature</label>
-                </td>
-                <td>
-                    <select name="temp" id="temp">
-                        <option value="1">Hot</option>
-                        <option value="2">Mild</option>
-                        <option value="0">Cool</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="humidity">Humidity</label>
-                </td>
-                <td>
-                    <select name="humidity" id="humidity">
-                        <option value="0">High</option>
-                        <option value="1">Normal</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="windy">Windy</label>
-                </td>
-                <td>
-                    <select name="windy" id="windy">
-                        <option value="0">False</option>
-                        <option value="1">True</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="answer">Play tennis:</label>
-                </td>
-                <td>
-                    <div id="answer"></div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <button>Predict</button>
-                </td>
-            </tr>
-        </table>
-    </form>
+    <div id="app">
+        <form>
+            <table>
+                <tr>
+                    <td>
+                        <label for="outlook">Outlook</label>
+                    </td>
+                    <td>
+                        <select name="outlook" id="outlook">
+                            <option value="0">Overcast</option>
+                            <option value="1">Rainy</option>
+                            <option value="2">Sunny</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="temp">Temperature</label>
+                    </td>
+                    <td>
+                        <select name="temp" id="temp">
+                            <option value="1">Hot</option>
+                            <option value="2">Mild</option>
+                            <option value="0">Cool</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="humidity">Humidity</label>
+                    </td>
+                    <td>
+                        <select name="humidity" id="humidity">
+                            <option value="0">High</option>
+                            <option value="1">Normal</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="windy">Windy</label>
+                    </td>
+                    <td>
+                        <select name="windy" id="windy">
+                            <option value="0">False</option>
+                            <option value="1">True</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="answer">Play tennis:</label>
+                    </td>
+                    <td>
+                        <div id="answer">{{ answer }}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button>Predict</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </body>
+<script>
+    const url = "/api/classify";
+    Vue.createApp({
+        data() {
+            return {
+                answer: ''
+            }
+        },
+        async mounted() {
+            axios.get(url).then(response => {
+                this.answer = response.data
+            })
+        }
+    }).mount('#app')
+</script>
+
 </html>
