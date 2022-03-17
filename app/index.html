@@ -12,69 +12,67 @@
 
 <body>
     <div id="app">
-        <form>
-            <table>
-                <tr>
-                    <td>
-                        <label for="outlook">Outlook</label>
-                    </td>
-                    <td>
-                        <select name="outlook" id="outlook">
-                            <option value="0">Overcast</option>
-                            <option value="1">Rainy</option>
-                            <option value="2">Sunny</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="temp">Temperature</label>
-                    </td>
-                    <td>
-                        <select name="temp" id="temp">
-                            <option value="1">Hot</option>
-                            <option value="2">Mild</option>
-                            <option value="0">Cool</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="humidity">Humidity</label>
-                    </td>
-                    <td>
-                        <select name="humidity" id="humidity">
-                            <option value="0">High</option>
-                            <option value="1">Normal</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="windy">Windy</label>
-                    </td>
-                    <td>
-                        <select name="windy" id="windy">
-                            <option value="0">False</option>
-                            <option value="1">True</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="answer">Play tennis:</label>
-                    </td>
-                    <td>
-                        <div id="answer">{{ answer }}</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <button>Predict</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <table>
+            <tr>
+                <td>
+                    <label for="outlook">Outlook</label>
+                </td>
+                <td>
+                    <select name="outlook" id="outlook" v-model="outlook">
+                        <option value="0">Overcast</option>
+                        <option value="1">Rainy</option>
+                        <option value="2">Sunny</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="temp">Temperature</label>
+                </td>
+                <td>
+                    <select name="temp" id="temp" v-model="temp">
+                        <option value="1">Hot</option>
+                        <option value="2">Mild</option>
+                        <option value="0">Cool</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="humidity">Humidity</label>
+                </td>
+                <td>
+                    <select name="humidity" id="humidity" v-model="humidity">
+                        <option value="0">High</option>
+                        <option value="1">Normal</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="windy">Windy</label>
+                </td>
+                <td>
+                    <select name="windy" id="windy" v-model="windy">
+                        <option value="0">False</option>
+                        <option value="1">True</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="answer">Play tennis:</label>
+                </td>
+                <td>
+                    <div id="answer">{{ answer }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button @click="classify">Predict</button>
+                </td>
+            </tr>
+        </table>
     </div>
 </body>
 <script>
@@ -82,13 +80,32 @@
     Vue.createApp({
         data() {
             return {
+                outlook: 0,
+                temp: 0,
+                humidity: 0,
+                windy: 0,
                 answer: ''
             }
         },
         async mounted() {
-            axios.get(url).then(response => {
-                this.answer = response.data
-            })
+            console.log("Mounted");
+        }, 
+        methods: {
+            classify(event) {
+                axios.post(url, {
+                    temp: this.temp,
+                    outlook: this.outlook,
+                    humidity: this.humidity,
+                    windy: this.windy
+                })
+                .then(response => {
+                    this.answer = response.data
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            }
         }
     }).mount('#app')
 </script>
