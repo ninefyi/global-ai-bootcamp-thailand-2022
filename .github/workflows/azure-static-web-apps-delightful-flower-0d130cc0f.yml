@@ -2,13 +2,14 @@ name: Azure Static Web Apps CI/CD
 
 on:
   workflow_dispatch:
-    choice:
-     type: choice
-     description: Make a choice
-     options:
-     - a
-     - b
-     - c
+    inputs:
+     choice:
+      type: choice
+      description: Make a choice
+      options:
+      - a
+      - b
+      - c
   push:
     branches:
       - main
